@@ -466,6 +466,16 @@
     .order-line-row {
       display: grid; grid-template-columns: 1fr 86px 36px; gap: 0.5rem; align-items: center;
     }
+    .order-line-row select { min-width: 0; }
+    .order-submit-bar {
+      display: flex; justify-content: space-between; align-items: center; gap: 0.9rem;
+      flex-wrap: wrap; padding-top: 0.75rem; border-top: 1px solid var(--border-soft);
+    }
+    @media (max-width: 600px) {
+      .order-line-row { grid-template-columns: 1fr 68px 34px; }
+      .order-submit-bar { flex-direction: column; align-items: stretch; text-align: center; }
+      .order-submit-bar .btn-gold { width: 100%; justify-content: center; padding: 0.95rem 1.25rem; font-size: 1.02rem; }
+    }
     .btn-sm {
       padding: 0.42rem 0.8rem; border-radius: 8px; border: 1px solid var(--border-soft);
       background: var(--bg-alt); color: var(--text-main); cursor: pointer; font-size: 0.84rem;
@@ -605,7 +615,6 @@
     <div class="hero-inner">
       <div class="hero-copy" id="heroCopy">
         <img id="heroLogo" class="hero-logo" alt="BIOFOOD" />
-        <span class="hero-kicker" id="heroKicker">✦ Navidad 2026 · Costa Rica</span>
         <div class="hero-phrase-wrap">
           <h1 class="hero-phrase" id="heroPhrase">Navidad con sabor Biofood</h1>
         </div>
@@ -689,9 +698,9 @@
           <label for="ordNotes">Notas o dedicatoria</label>
           <textarea id="ordNotes" rows="2" placeholder="Indicaciones de entrega, tarjeta de regalo, etc."></textarea>
         </div>
-        <div class="form-full" style="display:flex;justify-content:space-between;align-items:center;padding-top:0.5rem;border-top:1px solid var(--border-soft)">
+        <div class="form-full order-submit-bar">
           <div><strong>Total estimado:</strong> <span id="clientOrderTotal">₡0</span> <small>(IVA incluido)</small></div>
-          <button type="submit" class="btn-gold" style="padding:0.7rem 1.4rem">Enviar por WhatsApp →</button>
+          <button type="submit" class="btn-gold">Enviar por WhatsApp →</button>
         </div>
       </form>
     </div>
@@ -1169,9 +1178,6 @@
       const festive = !!state.config.festive;
       document.documentElement.setAttribute('data-festive', festive ? 'true' : 'false');
 
-      document.getElementById('heroKicker').textContent = festive
-        ? `✦ ${state.config.campaign} · Costa Rica`
-        : '✦ Cocina Artesanal · Costa Rica';
       document.getElementById('heroCta').textContent = festive
         ? `Ver especiales de ${state.config.campaign} →`
         : 'Ver catálogo artesanal →';
